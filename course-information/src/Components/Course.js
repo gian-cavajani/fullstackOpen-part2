@@ -6,12 +6,16 @@ import Total from "./Total";
 const Course = ({ course }) => {
   return (
     <div>
-      <Header course={course[0]} />
-      <Content course={course[0].parts} />
-      <Total parts={course[0].parts} />
-      <Header course={course[1]} />
-      <Content course={course[1].parts} />
-      <Total parts={course[1].parts} />
+      {/* este map devuelve 2 objects, el de name:"half stack..."y el de name:"Node.js" */}
+      {course.map((co) => {
+        return (
+          <div key={co.id}>
+            <Header course={co.name} />
+            <Content course={co.parts} />
+            <Total parts={co.parts} />
+          </div>
+        );
+      })}
     </div>
   );
 };
