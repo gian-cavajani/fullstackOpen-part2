@@ -6,7 +6,11 @@ const Total = ({ parts }) => {
     return s + part.exercises;
   }, 0);
   //   console.log("sum", sum);
-  return <p>Number of exercises {sum}</p>;
+  return (
+    <p>
+      <strong>Number of exercises {sum}</strong>
+    </p>
+  );
 };
 
 export default Total;

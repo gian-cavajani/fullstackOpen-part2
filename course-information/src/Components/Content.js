@@ -11,9 +11,9 @@ const Part = ({ part }) => {
 const Content = ({ course }) => {
   return (
     <div>
-      <Part part={course.parts[0]} />
-      <Part part={course.parts[1]} />
-      <Part part={course.parts[2]} />
+      {course.map((p) => {
+        return <Part key={p.id} part={p} />;
+      })}
     </div>
   );
 };
