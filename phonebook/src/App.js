@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Form from "./components/Form";
+import Filter from "./components/Filter";
+import People from "./components/People";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -48,34 +51,23 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h2>Phonebook</h2>
-      <form onSubmit={filterName}>
-        filter people:
-        <input type="text" onChange={handleChangeFilt} value={newFilt} />
-        <button type="submit">filter</button>
-      </form>
-      <button onClick={handleShowAll}>show all</button>
-      <form onSubmit={addPerson}>
-        <div>
-          name:{" "}
-          <input type="text" onChange={handleChangeName} value={newName} />
-        </div>
-        <div>
-          number:{" "}
-          <input type="text" onChange={handleChangeNum} value={newNum} />
-        </div>
-        <button type="submit">add</button>
-      </form>
-      <h2>Numbers</h2>
-      {namesToShow.map((p) => {
-        return (
-          <p key={p.id}>
-            Name: {p.name}, Number: {p.number}
-          </p>
-        );
-      })}
-    </div>
+    <section>
+      <Filter
+        filterName={filterName}
+        handleChangeFilt={handleChangeFilt}
+        newFilt={newFilt}
+        handleShowAll={handleShowAll}
+      />
+      <Form
+        addPerson={addPerson}
+        handleChangeName={handleChangeName}
+        newName={newName}
+        newNum={newNum}
+        handleChangeNum={handleChangeNum}
+      />
+
+      <People names={namesToShow} />
+    </section>
   );
 };
 
