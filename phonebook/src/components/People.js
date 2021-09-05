@@ -7,7 +7,9 @@ const People = ({ names }) => {
       {names.map((p) => {
         return (
           <p key={p.id}>
-            Name: {p.name}, Number: {p.number}
+            <em>
+              Name: {p.name}, Number: {p.number}
+            </em>
           </p>
         );
       })}
