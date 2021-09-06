@@ -1,35 +1,49 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Countries = ({ countries }) => {
-  return (
-    <ul>
-      {countries.map((coun, ind) => {
-        if (countries.length === 1) {
-          return (
-            <div key={ind}>
-              <h2>{coun.name}</h2>
-              <img src={coun.flag} width="150" />
-              <p>capital {coun.capital}</p>
-              <p>population {coun.population.toLocaleString()}</p>
-              <h3>languages</h3>
-              <ul>
-                {coun.languages.map((atr, ind) => {
-                  return <li key={ind}>{atr.name}</li>;
-                })}
-              </ul>
-            </div>
-          );
-        } else if (countries.length <= 10) {
-          return (
-            <li key={ind}>
-              <p>Country name: {coun.name}</p>
-            </li>
-          );
-        }
-      })}
-    </ul>
-  );
+const Countries = ({ countries, setFiltCountry }) => {
+  if (countries.length <= 10 && countries.length >= 2) {
+    return (
+      <div>
+        {countries.map((coun, ind) => (
+          <p key={ind}>
+            {" "}
+            {coun.name}
+            <button
+              onClick={() => {
+                setFiltCountry([coun]);
+                console.log("countries", countries);
+                console.log("country", coun);
+                console.log("[country]", [coun]); //crea un array y mete al objeto adentro asi lo puede agarrar el prox return.
+              }}>
+              show
+            </button>
+          </p>
+        ))}
+      </div>
+    );
+  } else if (countries.length <= 1) {
+    return (
+      <div>
+        <h2>{countries[0].name}</h2>
+        <img src={countries[0].flag} width="150" />
+        <p>capital {countries[0].capital}</p>
+        <p>population {countries[0].population.toLocaleString()}</p>
+        <h3>languages</h3>
+        <ul>
+          {countries[0].languages.map((atr, ind) => {
+            return <li key={ind}>{atr.name}</li>;
+          })}
+        </ul>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p>Search</p>
+      </div>
+    );
+  }
 };
 
 function App() {
@@ -52,7 +66,6 @@ function App() {
       setFiltCountry(countriesToShow);
     }
   };
-  console.log("a", filtCountry);
 
   return (
     <article>
@@ -60,7 +73,7 @@ function App() {
         <span>search country: </span>
         <input type="text" onChange={handleFilter} value={filtered} />
       </section>
-      <Countries countries={filtCountry} />
+      <Countries countries={filtCountry} setFiltCountry={setFiltCountry} />
     </article>
   );
 }
