@@ -24,6 +24,31 @@
       "name": "gian",
       "number": "cava",
       "id": 5
+    },
+    {
+      "name": "trying",
+      "number": " something",
+      "id": 6
+    },
+    {
+      "name": "hola",
+      "number": "todobien?",
+      "id": 7
+    },
+    {
+      "name": "testing",
+      "number": "http post",
+      "id": 8
+    },
+    {
+      "name": "it works!",
+      "number": "11!!11",
+      "id": 9
+    },
+    {
+      "name": "i removed ",
+      "number": "the id from the object",
+      "id": 10
     }
   ]
 }

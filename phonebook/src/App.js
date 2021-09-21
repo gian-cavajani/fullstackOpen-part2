@@ -3,7 +3,7 @@ import Form from "./components/Form";
 import Filter from "./components/Filter";
 import People from "./components/People";
 import axios from "axios";
-
+import personService from "./services/person";
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
@@ -12,8 +12,8 @@ const App = () => {
   const [showFilter, setShow] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    personService.getAll().then((initial) => {
+      setPersons(initial);
     });
   }, []);
 
@@ -23,17 +23,14 @@ const App = () => {
     const objectPerson = {
       name: newName,
       number: newNum,
-      id: persons.length + 1,
     };
 
     if (persons.some((e) => e.name === objectPerson.name)) {
       return window.alert(`${newName} is already on the list`);
     } else {
-      axios
-        .post("http://localhost:3001/persons", objectPerson)
-        .then((response) => {
-          setPersons(persons.concat(response.data));
-        });
+      personService.create(objectPerson).then((newOne) => {
+        setPersons(persons.concat(newOne));
+      });
     }
     setNewName("");
     setNewNum("");
