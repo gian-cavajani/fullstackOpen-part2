@@ -29,7 +29,11 @@ const App = () => {
     if (persons.some((e) => e.name === objectPerson.name)) {
       return window.alert(`${newName} is already on the list`);
     } else {
-      setPersons(persons.concat(objectPerson));
+      axios
+        .post("http://localhost:3001/persons", objectPerson)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+        });
     }
     setNewName("");
     setNewNum("");
