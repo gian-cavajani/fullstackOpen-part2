@@ -17,6 +17,15 @@ const App = () => {
     });
   }, []);
 
+  const handleRemove = (id) => {
+    const personFiltered = persons.filter((person) => person.id === id);
+    if (window.confirm(`remove ${personFiltered[0].name}?`)) {
+      personService.remove(id).then(() => {
+        setPersons(persons.filter((p) => p.id !== id));
+      });
+    }
+  };
+
   const addPerson = (event) => {
     event.preventDefault();
 
@@ -57,7 +66,6 @@ const App = () => {
   const handleShowAll = () => {
     setShow(true);
   };
-
   return (
     <section>
       <Filter
@@ -73,8 +81,16 @@ const App = () => {
         newNum={newNum}
         handleChangeNum={handleChangeNum}
       />
-
-      <People names={namesToShow} />
+      <h2>numbers: </h2>
+      <ul>
+        {namesToShow.map((names) => (
+          <People
+            key={names.id}
+            names={names}
+            remove={() => handleRemove(names.id)}
+          />
+        ))}
+      </ul>
     </section>
   );
 };
