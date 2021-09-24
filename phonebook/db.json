@@ -1,16 +1,6 @@
 {
   "persons": [
     {
-      "name": "nana",
-      "number": "3333",
-      "id": 3
-    },
-    {
-      "name": "sadasd",
-      "number": "12213123",
-      "id": 4
-    },
-    {
       "name": "GIasnn",
       "number": "",
       "id": 6
@@ -19,11 +9,6 @@
       "name": "Gainlu",
       "number": "2312",
       "id": 7
-    },
-    {
-      "name": "giaaaa",
-      "number": "3231",
-      "id": 8
     },
     {
       "name": "Gianku",

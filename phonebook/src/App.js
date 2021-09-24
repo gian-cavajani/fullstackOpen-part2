@@ -21,9 +21,17 @@ const App = () => {
   const handleRemove = (id) => {
     const personFiltered = persons.filter((person) => person.id === id);
     if (window.confirm(`remove ${personFiltered[0].name}?`)) {
-      personService.remove(id).then(() => {
-        setPersons(persons.filter((p) => p.id !== id));
-      });
+      personService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter((p) => p.id !== id));
+        })
+        .catch((error) => {
+          setMenssage(`ERROR`);
+          setTimeout(() => {
+            setMenssage(null);
+          }, 3000);
+        });
     }
   };
 
@@ -44,26 +52,42 @@ const App = () => {
           `${newName} is already on the list, would you like to update the number?`
         )
       ) {
-        personService.updates(persona.id, changedNum).then((response) => {
-          setPersons(
-            persons.map((p) => (p.id !== persona.id ? p : response.data)) //actualiza la pagina con el nuevo num.
-          );
-          setMenssage(
-            `${changedNum.name} number updated to: ${changedNum.number}`
-          );
+        personService
+          .updates(persona.id, changedNum)
+          .then((response) => {
+            setPersons(
+              persons.map((p) => (p.id !== persona.id ? p : response.data)) //actualiza la pagina con el nuevo num.
+            );
+            setMenssage(
+              `${changedNum.name} number updated to: ${changedNum.number}`
+            );
+            setTimeout(() => {
+              setMenssage(null);
+            }, 3000);
+          })
+          .catch((error) => {
+            setMenssage(`ERROR`);
+            setTimeout(() => {
+              setMenssage(null);
+            }, 3000);
+          });
+      }
+    } else {
+      personService
+        .create(objectPerson)
+        .then((newOne) => {
+          setPersons(persons.concat(newOne));
+          setMenssage(`Added ${objectPerson.name}`);
+          setTimeout(() => {
+            setMenssage(null);
+          }, 3000);
+        })
+        .catch((error) => {
+          setMenssage(`ERROR`);
           setTimeout(() => {
             setMenssage(null);
           }, 3000);
         });
-      }
-    } else {
-      personService.create(objectPerson).then((newOne) => {
-        setPersons(persons.concat(newOne));
-        setMenssage(`Added ${objectPerson.name}`);
-        setTimeout(() => {
-          setMenssage(null);
-        }, 3000);
-      });
     }
     setNewName("");
     setNewNum("");

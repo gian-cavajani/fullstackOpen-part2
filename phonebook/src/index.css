@@ -17,6 +17,13 @@ h2 {
   border-radius: 10px;
   font-size: 20px;
 }
+.error{
+   border: 4px rgb(224, 153, 153) solid;
+  text-align: center;
+  color: rgb(212, 109, 109);
+  border-radius: 10px;
+  font-size: 20px;
+}
 ul {
   list-style: none;
   width: 80%;
