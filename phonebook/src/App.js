@@ -34,8 +34,22 @@ const App = () => {
       number: newNum,
     };
 
-    if (persons.some((e) => e.name === objectPerson.name)) {
-      return window.alert(`${newName} is already on the list`);
+    if (persons.find((e) => e.name === objectPerson.name)) {
+      const persona = persons.find((e) => e.name === objectPerson.name);
+      const changedNum = { ...persona, number: newNum };
+      console.log(changedNum);
+      if (
+        window.confirm(
+          `${newName} is already on the list, would you like to update the number?`
+        )
+      ) {
+        personService.updates(persona.id, changedNum).then((response) => {
+          setPersons(
+            persons.map((p) => (p.id !== persona.id ? p : response.data))
+          );
+        });
+        // alert("aaa")
+      }
     } else {
       personService.create(objectPerson).then((newOne) => {
         setPersons(persons.concat(newOne));

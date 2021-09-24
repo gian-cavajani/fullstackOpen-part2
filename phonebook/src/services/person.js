@@ -16,5 +16,9 @@ const remove = (id) => {
   return request;
 };
 
+const updates = (id, newObj) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObj);
+  return request;
+};
 // const update
-export default { getAll, create, remove };
+export default { getAll, create, remove, updates };
