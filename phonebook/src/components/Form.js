@@ -12,9 +12,7 @@ const Form = ({
       {" "}
       <form onSubmit={addPerson}>
         name: <input type="text" onChange={handleChangeName} value={newName} />
-        <br />
         number: <input type="text" onChange={handleChangeNum} value={newNum} />
-        <br />
         <button type="submit">add</button>
       </form>
     </article>

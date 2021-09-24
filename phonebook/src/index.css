@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* border: 0; */
+}
+body {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+h2 {
+  color: rgb(153, 153, 224);
+}
+.message {
+  border: 4px rgb(153, 153, 224) solid;
+  text-align: center;
+  color: rgb(109, 109, 212);
+  border-radius: 10px;
+  font-size: 20px;
+}
+ul {
+  list-style: none;
+  width: 80%;
+  margin: 0 auto;
+}
+ul li {
+  /* margin: 3px; */
+  border-left: 4px rgb(153, 153, 224) solid;
+  color: rgb(109, 109, 212);
+  margin: 5px;
+}
+ul li:hover {
+  background-color: rgb(215, 215, 238);
+}
+ul li span {
+  color: black;
+}
+ul li button {
+  color: rgb(109, 109, 212);
+  background-color: rgb(212, 212, 235);
+  border: 1px solid rgb(109, 109, 212);
+  padding: 2px;
+  /* margin-left: 80%; */
+}
+
+/* .message p {
+} */

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
 import Filter from "./components/Filter";
 import People from "./components/People";
+import Message from "./components/Message";
 import axios from "axios";
 import personService from "./services/person";
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
   const [newNum, setNewNum] = useState("");
   const [newFilt, setNewFilt] = useState("");
   const [showFilter, setShow] = useState(true);
-
+  const [menssage, setMenssage] = useState(null);
   useEffect(() => {
     personService.getAll().then((initial) => {
       setPersons(initial);
@@ -34,8 +35,8 @@ const App = () => {
       number: newNum,
     };
 
-    if (persons.find((e) => e.name === objectPerson.name)) {
-      const persona = persons.find((e) => e.name === objectPerson.name);
+    const persona = persons.find((e) => e.name === objectPerson.name);
+    if (persona) {
       const changedNum = { ...persona, number: newNum };
       console.log(changedNum);
       if (
@@ -45,14 +46,23 @@ const App = () => {
       ) {
         personService.updates(persona.id, changedNum).then((response) => {
           setPersons(
-            persons.map((p) => (p.id !== persona.id ? p : response.data))
+            persons.map((p) => (p.id !== persona.id ? p : response.data)) //actualiza la pagina con el nuevo num.
           );
+          setMenssage(
+            `${changedNum.name} number updated to: ${changedNum.number}`
+          );
+          setTimeout(() => {
+            setMenssage(null);
+          }, 3000);
         });
-        // alert("aaa")
       }
     } else {
       personService.create(objectPerson).then((newOne) => {
         setPersons(persons.concat(newOne));
+        setMenssage(`Added ${objectPerson.name}`);
+        setTimeout(() => {
+          setMenssage(null);
+        }, 3000);
       });
     }
     setNewName("");
@@ -82,6 +92,7 @@ const App = () => {
   };
   return (
     <section>
+      <Message menssage={menssage} />
       <Filter
         filterName={filterName}
         handleChangeFilt={handleChangeFilt}
